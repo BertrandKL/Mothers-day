@@ -266,7 +266,8 @@ button:focus-visible {
 
 @media (max-width: 980px) {
   .page {
-    padding: 1.4rem 1rem 2.8rem;
+    align-items: flex-start;
+    padding: 1.4rem 1rem 3.2rem;
   }
 
   .hero {
@@ -280,6 +281,13 @@ button:focus-visible {
 
   button {
     width: 100%;
+  }
+
+  .hint {
+    position: relative;
+    margin: 2rem auto 0;
+    left: auto;
+    transform: none;
   }
 
   .card-meta {
