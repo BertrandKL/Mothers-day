@@ -219,6 +219,16 @@ button:focus-visible {
   letter-spacing: 0.01em;
 }
 
+.credit {
+  position: absolute;
+  left: 50%;
+  bottom: 0.8rem;
+  transform: translateX(-50%);
+  color: #7c5b6a;
+  font-size: 0.84rem;
+  opacity: 0.82;
+}
+
 .petal,
 .sparkle {
   position: absolute;
