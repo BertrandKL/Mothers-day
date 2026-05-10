@@ -264,13 +264,13 @@ button:focus-visible {
   100% { opacity: 0; transform: translate(calc(-50% + 0px), -120%) rotate(45deg) scale(1.25); }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 980px) and (orientation: portrait) {
   .page {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 1.2rem 1rem 2rem;
-    min-height: auto;
+    padding: 1rem 0.75rem 1.8rem;
+    min-height: 100vh;
   }
 
   .page-background {
@@ -281,7 +281,8 @@ button:focus-visible {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 1.2rem;
+    max-width: 100%;
+    gap: 1rem;
     align-items: center;
   }
 
@@ -289,29 +290,37 @@ button:focus-visible {
     max-width: 100%;
     width: 100%;
     text-align: center;
+    padding: 0 0.5rem;
   }
 
   .eyebrow {
     display: inline-flex;
+    margin-bottom: 1rem;
+    font-size: 0.8rem;
+    padding: 0.7rem 1rem;
   }
 
   h1 {
-    font-size: clamp(2.4rem, 14vw, 3.6rem);
+    font-size: clamp(2.2rem, 12vw, 3.2rem);
+    margin-bottom: 0.8rem;
   }
 
   .headline {
-    font-size: 1rem;
-    margin: 0.8rem 0;
+    font-size: 0.95rem;
+    margin: 0.6rem 0;
+    line-height: 1.5;
   }
 
   .detail {
-    margin: 0.8rem 0 1.2rem;
-    font-size: 0.95rem;
+    margin: 0.8rem 0 1rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
   }
 
   .hero-card {
     width: 100%;
     max-width: 100%;
+    margin-top: 0.5rem;
   }
 
   .card-deco {
@@ -319,27 +328,31 @@ button:focus-visible {
   }
 
   .card-content {
-    padding: 1.8rem;
+    padding: 1.5rem;
+    border-radius: 28px;
   }
 
   .card-title {
-    font-size: 1.4rem;
+    font-size: 1.3rem;
+    margin-bottom: 0.8rem;
   }
 
   .card-description {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .card-meta {
     flex-direction: column;
-    gap: 0.6rem;
-    margin-top: 1.2rem;
+    gap: 0.5rem;
+    margin-top: 1rem;
   }
 
   .pill {
-    padding: 0.7rem 1rem;
-    font-size: 0.9rem;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.85rem;
+    width: 100%;
+    text-align: center;
   }
 
   .petal-decor {
@@ -347,9 +360,15 @@ button:focus-visible {
     bottom: auto;
     right: auto;
     width: 100%;
-    gap: 1rem;
-    margin-top: 1.2rem;
-    padding: 0 1rem;
+    gap: 0.8rem;
+    margin-top: 1rem;
+    padding: 0;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .petal {
+    width: 18px;
+    height: 26px;
   }
 
   .hint {
@@ -357,9 +376,12 @@ button:focus-visible {
     transform: none;
     left: auto;
     bottom: auto;
-    margin: 1.8rem 0 0;
+    margin: 1.2rem 0 0;
+    padding: 0 0.75rem;
     color: #6e4d61;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    text-align: center;
   }
 
   .credit {
@@ -367,10 +389,11 @@ button:focus-visible {
     transform: none;
     left: auto;
     bottom: auto;
-    margin: 0.8rem 0 0;
+    margin: 0.6rem 0 0;
+    padding: 0 0.75rem;
     display: block;
     text-align: center;
-    word-wrap: break-word;
+    font-size: 0.8rem;
   }
 
   .credit::before {
