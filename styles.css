@@ -265,14 +265,12 @@ button:focus-visible {
 }
 
 @media (max-width: 980px) {
-  .hero {
-    grid-template-columns: 1fr;
-  }
-
+  .page {
     padding: 1.4rem 1rem 2.8rem;
   }
 
   .hero {
+    grid-template-columns: 1fr;
     gap: 1.5rem;
   }
 
