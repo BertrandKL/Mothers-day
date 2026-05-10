@@ -1,98 +1,82 @@
-const loveButton = document.getElementById('loveButton') || document.getElementById('loveButton');
-const stage = document.querySelector('.stage');
-const confettiContainer = document.getElementById('confetti');
+const loveButton = document.getElementById('loveButton');
+const page = document.querySelector('.page');
 
 const randomBetween = (min, max) => Math.random() * (max - min) + min;
 
-const createParticle = (type, x, y) => {
+const createParticle = (x, y, color) => {
   const particle = document.createElement('div');
+  const type = Math.random() > 0.5 ? 'particle' : 'sparkle';
   particle.className = type;
   particle.style.left = `${x}px`;
   particle.style.top = `${y}px`;
 
+  if (type === 'particle') {
+    particle.style.width = `${randomBetween(12, 18)}px`;
+    particle.style.height = `${randomBetween(18, 26)}px`;
+    particle.style.background = color;
+    particle.style.borderRadius = '55% 45% 60% 40%';
+    particle.style.transform = `rotate(${randomBetween(-40, 40)}deg)`;
+  }
+
   if (type === 'sparkle') {
-    particle.style.width = `${randomBetween(10, 16)}px`;
-    particle.style.height = `${randomBetween(10, 16)}px`;
-    particle.style.background = `radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255, 126, 185, 0.9) 35%, transparent 72%)`;
+    const size = randomBetween(8, 14);
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.background = 'radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,255,255,0.3) 50%, transparent 100%)';
+    particle.style.filter = 'blur(0.2px)';
   }
 
-  if (type === 'confetti-piece') {
-    const colors = ['#ff7eb9', '#7ef0d2', '#ffaf7b', '#ab9cff', '#ffe36b'];
-    particle.style.background = colors[Math.floor(randomBetween(0, colors.length))];
-    particle.style.width = `${randomBetween(8, 14)}px`;
-    particle.style.height = `${randomBetween(8, 14)}px`;
-    particle.style.transform = `rotate(${randomBetween(0, 360)}deg)`;
-  }
-
-  const removeParticle = () => particle.remove();
-  particle.addEventListener('animationend', removeParticle);
-
-  if (confettiContainer) {
-    confettiContainer.appendChild(particle);
-  } else if (stage) {
-    stage.appendChild(particle);
-  }
+  particle.addEventListener('animationend', () => particle.remove());
+  page.appendChild(particle);
 };
 
 const makeTrail = (event) => {
-  if (!stage) return;
-  const rect = stage.getBoundingClientRect();
+  if (!page) return;
+  const rect = page.getBoundingClientRect();
   const x = event.clientX - rect.left;
   const y = event.clientY - rect.top;
-  createParticle('sparkle', x, y);
-  if (Math.random() > 0.6) {
-    createParticle('confetti-piece', x + randomBetween(-16, 16), y + randomBetween(-16, 16));
+  const colors = ['#ff96c5', '#ffb9d3', '#f7a3ca', '#ffd4e3'];
+  createParticle(x, y, colors[Math.floor(randomBetween(0, colors.length))]);
+  if (Math.random() > 0.55) {
+    createParticle(x + randomBetween(-14, 14), y + randomBetween(-14, 14), '#ffffff');
   }
 };
 
-if (stage) {
-  stage.addEventListener('pointermove', (event) => {
+if (page) {
+  page.addEventListener('pointermove', (event) => {
     if (!event.isPrimary) return;
-    if (Math.random() > 0.72) {
+    if (Math.random() > 0.7) {
       makeTrail(event);
     }
   });
 
-  stage.addEventListener('click', (event) => {
+  page.addEventListener('click', (event) => {
     makeTrail(event);
-    triggerBurst(event.clientX, event.clientY);
+    triggerBloom(event.clientX, event.clientY);
   });
 }
 
-const triggerBurst = (clientX, clientY) => {
-  if (!stage) return;
-  const rect = stage.getBoundingClientRect();
+const triggerBloom = (clientX, clientY) => {
+  if (!page) return;
+  const rect = page.getBoundingClientRect();
   const x = clientX - rect.left;
   const y = clientY - rect.top;
-  for (let i = 0; i < 12; i += 1) {
-    createParticle('confetti-piece', x + randomBetween(-20, 20), y + randomBetween(-20, 20));
-    createParticle('sparkle', x + randomBetween(-12, 12), y + randomBetween(-12, 12));
+  const colors = ['#ff96c5', '#ffb9d3', '#f7a3ca', '#ffd4e3'];
+  for (let i = 0; i < 14; i += 1) {
+    createParticle(x + randomBetween(-24, 24), y + randomBetween(-24, 24), colors[Math.floor(randomBetween(0, colors.length))]);
   }
-};
-
-const pulseButton = () => {
-  if (!loveButton) return;
-  loveButton.animate(
-    [
-      { transform: 'translateY(0) scale(1)' },
-      { transform: 'translateY(-5px) scale(1.03)' },
-      { transform: 'translateY(0) scale(1)' }
-    ],
-    { duration: 350, easing: 'ease-in-out' }
-  );
 };
 
 if (loveButton) {
   loveButton.addEventListener('pointerenter', () => {
     loveButton.style.transform = 'translateY(-3px) scale(1.02)';
   });
-
   loveButton.addEventListener('pointerleave', () => {
     loveButton.style.transform = 'translateY(0) scale(1)';
   });
-
   loveButton.addEventListener('click', (event) => {
-    pulseButton();
-    triggerBurst(event.clientX, event.clientY);
+    event.preventDefault();
+    const rect = loveButton.getBoundingClientRect();
+    triggerBloom(rect.left + rect.width / 2, rect.top + rect.height / 2);
   });
 }
