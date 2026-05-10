@@ -23,7 +23,10 @@
       <aside class="hero-card">
         <div class="card-deco"></div>
         <div class="card-content">
-          <div class="card-title">To my beautiful mom</div>
+          <div class="card-title-wrapper">
+            <div class="card-title">To my beautiful mom</div>
+            <button class="info-icon" id="infoIcon" aria-label="More info">ℹ️</button>
+          </div>
           <p class="card-description">Thank you for your gentle strength, your kind heart, and the bright love you bring into every day.</p>
           <div class="card-meta">
             <div class="pill">Blooming love</div>
@@ -41,6 +44,13 @@
 
     <div class="hint">Tap, click, or drag across the page to scatter petals.</div>
     <div class="credit">Made by Bertrand Koh Lopez</div>
+  </div>
+
+  <div id="imageModal" class="modal">
+    <div class="modal-content">
+      <button class="modal-close" id="modalClose">×</button>
+      <img src="dog.jpg" alt="Dog" class="modal-image">
+    </div>
   </div>
 
   <script src="script.js"></script>

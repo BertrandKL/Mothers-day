@@ -1,4 +1,7 @@
 ﻿const page = document.querySelector('.page');
+const infoIcon = document.getElementById('infoIcon');
+const imageModal = document.getElementById('imageModal');
+const modalClose = document.getElementById('modalClose');
 const petalColors = ['#ffbed6', '#ffd8e8', '#ffc6d9', '#ffe7f2'];
 let isPointerDown = false;
 
@@ -74,5 +77,22 @@ if (page) {
 
   page.addEventListener('click', (event) => {
     triggerBloom(event.clientX, event.clientY);
+  });
+}
+
+if (infoIcon && imageModal && modalClose) {
+  infoIcon.addEventListener('click', (event) => {
+    event.stopPropagation();
+    imageModal.classList.add('active');
+  });
+
+  modalClose.addEventListener('click', () => {
+    imageModal.classList.remove('active');
+  });
+
+  imageModal.addEventListener('click', (event) => {
+    if (event.target === imageModal) {
+      imageModal.classList.remove('active');
+    }
   });
 }
