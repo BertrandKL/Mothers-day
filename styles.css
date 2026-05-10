@@ -238,6 +238,12 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   font-size: 1rem;
+  animation: bloom 2.4s ease-in-out infinite;
+}
+
+@keyframes bloom {
+  0%, 100% { transform: scale(1); opacity: 0.9; }
+  50% { transform: scale(1.15); opacity: 1; }
 }
 
 .petal,
