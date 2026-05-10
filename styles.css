@@ -227,6 +227,17 @@ button:focus-visible {
   color: #7c5b6a;
   font-size: 0.84rem;
   opacity: 0.82;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.credit::before {
+  content: '🌸';
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
 }
 
 .petal,
