@@ -220,16 +220,15 @@ button:focus-visible {
 }
 
 .credit {
-  position: absolute;
-  left: 50%;
-  bottom: 0.8rem;
-  transform: translateX(-50%);
+  position: relative;
+  margin: 1.5rem auto 0;
   color: #7c5b6a;
   font-size: 0.84rem;
   opacity: 0.82;
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
+  justify-content: center;
 }
 
 .credit::before {
@@ -270,13 +269,6 @@ button:focus-visible {
     grid-template-columns: 1fr;
   }
 
-  .hero-card {
-    order: -1;
-  }
-}
-
-@media (max-width: 620px) {
-  .page {
     padding: 1.4rem 1rem 2.8rem;
   }
 
