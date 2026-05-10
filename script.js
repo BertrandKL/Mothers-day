@@ -1,6 +1,6 @@
-﻿const loveButton = document.getElementById('loveButton');
-const page = document.querySelector('.page');
+﻿const page = document.querySelector('.page');
 const petalColors = ['#ffbed6', '#ffd8e8', '#ffc6d9', '#ffe7f2'];
+let isPointerDown = false;
 
 const randomBetween = (min, max) => Math.random() * (max - min) + min;
 
@@ -51,31 +51,28 @@ const triggerBloom = (clientX, clientY) => {
 };
 
 if (page) {
+  page.addEventListener('pointerdown', () => {
+    isPointerDown = true;
+  });
+
+  page.addEventListener('pointerup', () => {
+    isPointerDown = false;
+  });
+
+  page.addEventListener('pointerleave', () => {
+    isPointerDown = false;
+  });
+
   page.addEventListener('pointermove', (event) => {
     if (!event.isPrimary) return;
-    if (Math.random() > 0.7) {
+    if (isPointerDown) {
+      addPetalTrail(event);
+    } else if (Math.random() > 0.85) {
       addPetalTrail(event);
     }
   });
 
   page.addEventListener('click', (event) => {
-    addPetalTrail(event);
     triggerBloom(event.clientX, event.clientY);
-  });
-}
-
-if (loveButton) {
-  loveButton.addEventListener('pointerenter', () => {
-    loveButton.style.transform = 'translateY(-3px) scale(1.02)';
-  });
-
-  loveButton.addEventListener('pointerleave', () => {
-    loveButton.style.transform = 'translateY(0) scale(1)';
-  });
-
-  loveButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    const rect = loveButton.getBoundingClientRect();
-    triggerBloom(rect.left + rect.width / 2, rect.top + rect.height / 2);
   });
 }
